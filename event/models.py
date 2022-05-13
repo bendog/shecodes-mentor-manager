@@ -54,12 +54,8 @@ class Module(BaseModel):
 class EventModule(BaseModel):
     """the learning module being taught at the event"""
 
-    event = models.ForeignKey(
-        Event, on_delete=models.CASCADE, related_name="event_modules"
-    )
-    module = models.ForeignKey(
-        Module, on_delete=models.PROTECT, related_name="event_modules"
-    )
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="event_modules")
+    module = models.ForeignKey(Module, on_delete=models.PROTECT, related_name="event_modules")
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
 
@@ -68,9 +64,7 @@ class EventModule(BaseModel):
 
 
 class EventModuleRole(BaseModel):
-    event_module = models.ForeignKey(
-        EventModule, models.CASCADE, related_name="required_roles"
-    )
+    event_module = models.ForeignKey(EventModule, models.CASCADE, related_name="required_roles")
     role = models.ForeignKey(Role, models.PROTECT, related_name="event_roles")
     mentor = models.ForeignKey(
         User,
